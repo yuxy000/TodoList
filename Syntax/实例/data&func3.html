@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据和方法</title>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+    	// 除了数据属性，Vue 实例还暴露了一些有用的实例属性与方法。它们都有前缀 $
+        function loaded() {
+        	var data = {a: 1};
+
+	        var vm = new Vue({
+	        	el: '#app',
+	            data: data
+	        });
+	
+	        console.log(vm.$data == data);
+	        console.log(vm.$el == document.getElementById('app'));
+	        
+	        // $watch 是一个实例方法
+	        vm.$watch('a', function (newValue, oldValue) {
+	        	console.log('newVlaue=' + newValue + ',oldValue=' + oldValue);
+	        });
+	       
+        }
+    </script>
+</head>
+<body onload="loaded()">
+    <div id="app">
+    	<p>{{ a }}</p>
+    	<button @click="a = 2">change it</button>
+    </div>
+</body>
+</html>

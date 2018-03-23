@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据和方法</title>
+    <script src="../../js/vue.min.js"></script>
+    <script>
+        var data = {a: 1};
+
+        var vm = new Vue({
+            data: data
+        })
+
+        console.log(vm.a == data.a);
+        
+        // 设置属性也会影响到原始数据
+        vm.a = 2;
+        console.log(data.a);
+        
+        //反之亦然
+        data.a = 3;
+        console.log(vm.a);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

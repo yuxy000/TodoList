@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用 v-for 把一个数组对应为一组元素</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<ul id="ul1">
+				<li v-for="item in items" :key="item.id">
+					{{ item.msg }}
+				</li>
+			</ul>
+			<!--
+            	作者：8534353@qq.com
+            	时间：2018-03-23
+            	描述：为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key 属性。理想的 key 值是每项都有的且唯一的 id。
+            -->
+			<ul id="ul2">
+				<li v-for="(item, index) of items" :key="item.id">
+					{{ parentMsg }} - {{ index }} - {{ item.msg }}
+				</li>
+			</ul>
+		</div>
+		<script>
+			var ul1 = new Vue({
+				el: '#ul1',
+				data: {
+					items: [
+						{ id: 1, msg: 'Foo' },
+						{ id: 2, msg: 'Baz' }
+					]
+				}
+			});
+			
+			var ul2 = new Vue({
+				el: '#ul2',
+				data: {
+					parentMsg: 'Parent',
+					items: [
+						{ id: 1, msg: 'Foo' },
+						{ id: 2, msg: 'Baz' }
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象语法</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+		<style>
+			#vm div {
+				width: 100px;
+				height: 100px;
+			}
+			.active {
+				background-color: yellow;
+			}
+			
+			.text-danger {
+				color: red;
+			}
+			.static {
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="vm">
+			<div v-bind:class="[activeClass, errorClass]">[activeClass, errorClass]</div>
+			<br />
+			<!--如果你也想根据条件切换列表中的 class，可以用三元表达式：-->
+			<div :class="[isActive ? activeClass : '', errorClass]">[isActive ? activeClass : '', errorClass]</div>
+			<!--不过，当有多个条件 class 时这样写有些繁琐。所以在数组语法中也可以使用对象语法：-->
+			<div :class="[{active: isActive}, errorClass]"></div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					isActive: true,
+					activeClass: 'active',
+					errorClass: 'text-danger'
+				},
+				computed: {
+					
+				}
+			})
+		</script>
+	</body>
+</html>

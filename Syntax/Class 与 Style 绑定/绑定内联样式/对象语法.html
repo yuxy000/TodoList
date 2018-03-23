@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>对象语法</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+		<style>
+			#vm div {
+				width: 100px;
+				height: 100px;
+			}
+			.active {
+				background-color: yellow;
+			}
+			
+			.text-danger {
+				color: red;
+			}
+			.static {
+				font-style: italic;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="vm">
+			<div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px', backgroundColor: bgColor }">ssss</div>
+			<br />
+
+			<div :style="styleObject">ClassObject</div>
+			
+			<div v-bind:style="[baseStyles, overridingStyles]"></div>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					activeColor: 'red',
+					fontSize: 30,
+					bgColor: 'lightblue',
+					styleObject: {
+						color: 'red',
+						fontSize: '13px',
+						backgroundColor: 'lightblue'
+					},
+					baseStyles: {
+						
+					},
+					overridingStyles:{
+						
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

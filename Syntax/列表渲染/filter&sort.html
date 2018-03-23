@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<!--不实际改变或重置原始数据。在这种情况下，可以创建返回过滤或排序数组的计算属性-->
+			<li v-for="n in evenNumbers" :key="n">
+				{{ n }}
+			</li>
+		</ul>
+		
+		<!--在计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 你可以使用一个 method 方法：-->
+		<ul id="ul2">
+			<li v-for="n in even(numbers)" :key="n">
+				{{ n }}
+			</li>
+		</ul>
+		<script>
+			var ul1 = new Vue({
+				el: '#ul1',
+				data: {
+					numbers: [0, 1, 2, 3, 4, 5]
+				},
+				computed: {
+					evenNumbers: function () {
+						return this.numbers.filter(function (number) {
+							return number % 2 === 0
+						});
+					}
+				}
+			});
+			
+			var ul2 = new Vue({
+				el: '#ul2',
+				data: {
+					numbers: [0, 1, 2, 3, 4, 5]
+				},
+				methods: {
+					even: function (numbers) {
+						return numbers.filter(function (number) {
+							return number % 2 === 0
+						});
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

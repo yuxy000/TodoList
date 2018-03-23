@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			未完成任务：
+			<br />
+			<!--它们处于同一节点，v-for 的优先级比 v-if 更高，这意味着 v-if 将分别重复运行于每个 v-for 循环中。当你想为仅有的一些项渲染节点时，这种优先级的机制会十分有用-->
+			<ul id="ul2">
+				<li v-for="(todo, index) of todos" :key="todo.id" v-if="!todo.isComplete">
+					{{ todo.msg }}
+				</li>
+			</ul>
+			
+			<!--而如果你的目的是有条件地跳过循环的执行，那么可以将 v-if 置于外层元素 (或 <template>)上。-->
+			<ul v-if="todos.length">
+				<li v-for="todo in todos">{{ todo.msg }}</li>
+			</ul>
+		</div>
+		<script>		
+			var ul2 = new Vue({
+				el: '#vm',
+				data: {
+					parentMsg: 'Parent',
+					todos: [
+						{ id: 1, msg: 'Foo', isComplete: true },
+						{ id: 2, msg: 'Baz', isComplete: false },
+						{ id: 3, msg: 'Tom', isComplete: true },
+						{ id: 4, msg: 'Redo', isComplete: false },
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

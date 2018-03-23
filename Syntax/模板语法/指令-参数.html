@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>指令-参数</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<a v-bind:href="url">百度</a>
+			<a v-on:click="doSomething">Click Me</a>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					url: 'http://www.baidu.com'
+				},
+				methods: {
+					doSomething: function() {
+						console.log('Click Me');
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

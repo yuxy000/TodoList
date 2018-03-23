@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>使用 JavaScript 表达式</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<p>Meaage: {{ rawHtml }}</p>
+			<p>Using v-html directive <span v-html="rawHtml"></span></p>
+			<!--
+				每个绑定都只能包含单个表达式
+			-->
+			<p>{{ num + 3 }}</p>
+			<p>{{ ok ? 'yes' : 'no' }}</p>
+			<p>{{ msg.split(' ').reverse().join(' ') }}</p>
+			<div v-bind:id="'list-' + id"></div>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					rawHtml: '<span style="color:red">This should be red</span>',
+					num: 3,
+					ok: true,
+					msg: 'This should be red',
+					id: 4
+				}
+			});
+			/**
+			 * 模板表达式都被放在沙盒中，
+			 * 只能访问全局变量的一个白名单，
+			 * 如 Math 和 Date 。
+			 * 你不应该在模板表达式中试图访问用户定义的全局变量。
+			 */
+		</script>
+	</body>
+</html>

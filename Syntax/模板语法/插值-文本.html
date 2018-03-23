@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>插值-文本</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<p>Meaage: {{ msg }}</p>
+			<!--
+            	作者：8534353@qq.com
+            	时间：2018-03-22
+            	描述： v-once 指令，你也能执行一次性地插值，当数据改变时，插值处的内容不会更新
+            -->
+			<span v-once>这个将不会改变: {{ msg }}</span>
+			<button @click="msg = '消息改变了'">change msg</button>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					msg: '你有一条新的消息'
+				}
+			});
+		</script>
+	</body>
+</html>

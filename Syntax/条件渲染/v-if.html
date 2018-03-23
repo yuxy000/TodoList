@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-if</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<h1 v-if="ok">Yes</h1>
+			<h1 v-else>No</h1>
+			
+			<p>因为 v-if 是一个指令，所以必须将它添加到一个元素上。但是如果想切换多个元素呢？此时可以把一个 &lt;template&gt; 元素当做不可见的包裹元素，并在上面使用 v-if。最终的渲染结果将不包含 &lt;template&gt;" 元素。</p>
+			<template v-if="ok">
+				<h1>title</h1>
+				<p>P 1</p>
+				<p>P 2</p>
+			</template>
+			
+			<p>v-else 元素必须紧跟在带 v-if 或者 v-else-if 的元素的后面，否则它将不会被识别。</p>
+			<div v-if="Math.random() > 0.5">
+				Now you see me
+			</div>
+			<div v-else>
+				Now you don't
+			</div>
+			
+			<p>类似于 v-else，v-else-if 也必须紧跟在带 v-if 或者 v-else-if 的元素之后。</p>
+			<div v-if="type === 'A'">
+				A
+			</div>
+			<div v-else-if="type === 'B'">
+				B
+			</div>
+			<div v-else-if="type === 'C'">
+				C
+			</div>
+			<div v-else>
+				Not A/B/C
+			</div>
+			
+			<!--
+            	作者：8534353@qq.com
+            	时间：2018-03-23
+            	描述：Vue 会尽可能高效地渲染元素，
+            	通常会复用已有元素而不是从头开始渲染。
+            	这么做除了使 Vue 变得非常快之外，还有其它一些好处。
+            	例如，如果你允许用户在不同的登录方式之间切换：
+            	
+            	那么在xia面的代码中切换 loginType 将不会清除用户已经输入的内容。
+            	因为两个模板使用了相同的元素，
+            	<input> 不会被替换掉——仅仅是替换了它的 placeholder。
+            -->
+			<!--<template v-if="loginType === 'username'">
+				<label>Username:</label>
+				<input type="text" placeholder="Enter Your Name" />
+			</template>
+			<template v-else>
+				<label>Email:</label>
+				<input type="text" placeholder="Enter Your Email" />
+			</template>
+			<br />
+			<button @click="changeLoginType">change loginType</button>-->
+			
+			<!--
+            	作者：8534353@qq.com
+            	时间：2018-03-23
+            	描述：如果两个元素是完全独立的，不要复用它们”。只需添加一个具有唯一值的 key 属性即可
+            -->
+            <template v-if="loginType === 'username'">
+				<label>Username:</label>
+				<input type="text" placeholder="Enter Your Name" key="username-input" />
+			</template>
+			<template v-else>
+				<label>Email:</label>
+				<input type="text" placeholder="Enter Your Email" key="email-input"/>
+			</template>
+			<br />
+			<button @click="changeLoginType">change loginType</button>
+            
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					ok: true,
+					type: 'D',
+					loginType: 'username'
+				},
+				methods: {
+					changeLoginType: function () {
+						if (this.loginType === 'username') {
+							this.loginType = 'email';
+						} else{
+							this.loginType = 'username';
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

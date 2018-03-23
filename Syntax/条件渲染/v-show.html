@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>v-show</title>
+		<script src="../../js/vue.min.js"></script>
+	</head>
+	<body>
+		<div id="vm">
+			<h1 v-show="ok">v-show</h1>
+			<button @click="toggleShowHide">show/hide</button>
+		</div>
+		<p>v-show 的元素始终会被渲染并保留在 DOM 中。
+			v-show 只是简单地切换元素的 CSS 属性 display。
+		</p>
+		<p style="color: red;">
+			注意，v-show 不支持 &lt;template&gt;" 元素，也不支持 v-else。
+		</p>
+		
+		<script>
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					ok: true
+				},
+				methods: {
+					toggleShowHide: function () {
+						this.ok = !this.ok;
+					}
+				}
+			
+			})
+		</script>
+	</body>
+</html>

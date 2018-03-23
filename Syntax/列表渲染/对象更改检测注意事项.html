@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<ul id="ul1">
+			<p>{{ a }}</p>
+			<p> {{ b }}</p>
+		</ul>
+		
+		<script>
+			var vm = new Vue({
+				el: '#ul1',
+				data: {
+					a: 1,
+					userProfile: {
+				      	name: 'Anika'
+				    }
+				}
+			})
+			vm.a = 2;// `vm.a` 现在是响应式的
+			//vm.b = 4;// `vm.b` 不是响应式的
+			
+			// 以下方式都是添加响应属性的
+			Vue.set(vm.userProfile, age, 27);
+			vm.$set(vm.userProfile, age, 27);
+			
+			Object.assign({}, vm.userProfile, {
+				age: 27, 
+				favoriteColor: 'Vue green'
+			})
+			
+		</script>
+	</body>
+</html>

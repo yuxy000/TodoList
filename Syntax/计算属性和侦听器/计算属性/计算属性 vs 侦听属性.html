@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算属性 vs 侦听属性</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			{{ fullName }}
+		</div>
+		<script type="text/javascript">
+//			var vm = new Vue({
+//				el: '#vm',
+//				data: {
+//					firstName: 'Foo',
+//					lastName: 'Bar',
+//					fullName: 'Foo Bar'
+//				},
+//				watch: {
+//					firstName: function (val) {
+//						this.fullName = val + ' ' + this.lastName;
+//					},
+//					lastName: function (val) {
+//						this.fullName = this.firstName + ' ' + val;
+//					}
+//				}
+//			});
+
+
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					firstName: 'Foo',
+					lastName: 'Bar',
+				},
+				computed: {
+					fullName: function () {
+						return this.firstName + ' ' + this.lastName;
+					}
+				}
+			});
+			
+
+		</script>
+	</body>
+</html>

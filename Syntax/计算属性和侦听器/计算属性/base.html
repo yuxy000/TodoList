@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>基础例子</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<p>Original message: "{{ message }}"</p>
+			<p>Cumputed reversed message: "{{ reversedMessage }}"</p>
+		</div>
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					message: 'hello'
+				},
+				computed: {
+					// 计算属性的 getter
+					reversedMessage: function () {
+						// 'this' 指向vm实例
+						return this.message.split('').reverse().join('');
+					}
+				}
+			});
+			
+			console.log(vm.reversedMessage);
+			vm.message = 'GoodBye';
+			console.log(vm.reversedMessage);
+		</script>
+	</body>
+</html>

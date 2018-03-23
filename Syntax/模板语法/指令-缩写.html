@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>指令-缩写</title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		
+		<div id="vm">
+			<!--
+            	作者：8534353@qq.com
+            	时间：2018-03-22
+            	描述：v-bind 缩写
+            -->
+            <!--完整写法-->
+            <a v-bind:href="url">...</a>
+            <!--缩写-->
+            <a :href="url">...</a>
+            
+            <!--
+            	作者：8534353@qq.com
+            	时间：2018-03-22
+            	描述：v-on 缩写
+            -->
+            <!--完整写法-->
+            <a v-on:click="doSomething">...</a>
+            <!--缩写-->
+            <a @click="doSomething">...</a>
+		</div>
+		
+		
+		<script type="text/javascript">
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					url: 'http://www.baidu.com'
+				},
+				methods: {
+					
+				}
+			});
+		</script>
+	</body>
+</html>
