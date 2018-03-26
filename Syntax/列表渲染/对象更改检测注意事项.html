@@ -4,11 +4,12 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+		<script src="https://cdn.bootcss.com/babel-standalone/6.26.0/babel.min.js"></script>
 	</head>
 	<body>
 		<ul id="ul1">
 			<p>{{ a }}</p>
-			<p> {{ b }}</p>
+			<p>{{ userProfile.age }}</p>
 		</ul>
 		
 		<script>
@@ -20,18 +21,19 @@
 				      	name: 'Anika'
 				    }
 				}
-			})
+			});
 			vm.a = 2;// `vm.a` 现在是响应式的
 			//vm.b = 4;// `vm.b` 不是响应式的
 			
 			// 以下方式都是添加响应属性的
-			Vue.set(vm.userProfile, age, 27);
-			vm.$set(vm.userProfile, age, 27);
+//			Vue.set(vm.userProfile, 'age', 27);
+//			vm.$set(vm.userProfile, 'age', 27);
 			
-			Object.assign({}, vm.userProfile, {
+			vm.userProfile = Object.assign({}, vm.userProfile, {
 				age: 27, 
 				favoriteColor: 'Vue green'
-			})
+			});
+			
 			
 		</script>
 	</body>

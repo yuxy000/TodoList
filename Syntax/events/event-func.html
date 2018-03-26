@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="em2">
+			<button @click="greet">Greet</button>
+			<pre>
+使用 v-on 有几个好处：
+1. 扫一眼 HTML 模板便能轻松定位在 JavaScript 代码里对应的方法。
+2. 因为你无须在 JavaScript 里手动绑定事件，你的 ViewModel 代码可以是非常纯粹的逻辑，和 DOM 完全解耦，更易于测试。
+3. 当一个 ViewModel 被销毁时，所有的事件处理器都会自动被删除。你无须担心如何自己清理它们。
+			</pre>
+		</div>
+		
+		<script>
+			var em2 = new Vue({
+				el: '#em2',
+				data: {
+					name: 'Vue2.js'
+				},
+				 // 在 `methods` 对象中定义方法
+				methods: {
+					greet: function (e) {
+						// `this` 在方法里指向当前 Vue 实例
+						console.log('Hello ' + this.name + '!');
+						// `event` 是原生 DOM 事件
+						if (e) {
+							console.log(e.target.tagName)
+						}
+					}
+				}
+			});
+			
+			//可以直接用js调用
+			em2.greet();
+		</script>
+	</body>
+</html>

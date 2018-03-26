@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+		<script type="text/javascript" src="../../js/jquery-3.3.1.min.js" ></script>
+	</head>
+	<body>
+		<div id="em">
+			
+			<button @click="say('hi')">Say Hi</button>
+			<button @click="say('what')">Say What</button>
+			<!--可以用特殊变量 $event 把原始的DOM事件传入方法-->
+			<button @click="warn('Form cannot be submitted yet.', $event)"></button>
+			<p id="msgp"></p>
+		</div>
+		
+		<script>
+			var em = new Vue({
+				el: '#em',
+				data: {
+					name: 'Vue2.js'
+				},
+				 // 在 `methods` 对象中定义方法
+				methods: {
+					say: function (msg) {
+						console.log(msg);
+						$('#msgp').html(msg);
+					},
+					warn: function (msg, event) {
+						if (event) {
+							event.preventDefault();
+						}
+						$('#msgp').html(msg);
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</html>

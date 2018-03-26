@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<my-component></my-component>
+			
+			<simple-counter></simple-counter>
+			<simple-counter></simple-counter>
+			<simple-counter></simple-counter>
+		</div>
+		<script>
+			Vue.component('my-component', {
+				template: '<div>A custom component</div>',
+				//data不是一个函数 Vue 会停止运行，并在控制台发出警告
+//				data: {
+//					message: 'Hello'
+//				}
+			});
+			
+			Vue.component('simple-counter', {
+				template: '<button @click="counter += 1">{{ counter }}</button>',
+				data: function () {
+					return {
+						counter: 0
+					}
+				}
+			});
+			
+			var vm = new Vue({
+				el: '#vm'
+			})
+		</script>
+	</body>
+</html>

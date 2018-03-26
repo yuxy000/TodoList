@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<p v-for="msg in msgs">{{ msg }}</p>
+			<button-message @message="handleMessage"></button-message>
+			<!--
+            	有时候，你可能想在某个组件的根元素上监听一个原生事件。可以使用 v-on 的修饰符 .native。例如：
+            	<my-component v-on:click.native="doTheThing"></my-component>
+            -->
+		</div>
+		
+		<script>
+			Vue.component('button-message', {
+				template: '<div><input type="text" v-model="message" /><button @click="handleSendMessage">Send</Button></div>'
+				,
+				data: function () {
+					return {
+						message: 'test message'
+					}
+				},
+				 methods: {
+				 	handleSendMessage: function () {
+				 		this.$emit('message', { message: this.message });
+				 	}
+				 },
+			});
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					msgs: []
+				},
+				methods: {
+					handleMessage: function (payload) {
+						this.msgs.push(payload.message);
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

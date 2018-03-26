@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<p>{{ msg }}</p>
+			<!--
+				<comp v-bind.sync="{ foo: 1, bar: 2 }"></comp>
+			-->
+			<my-msg :msg.sync="msg" ></my-msg>
+		</div>
+		
+		<script>
+			Vue.component('my-msg', {
+				template: '<input v-model="message" />',
+				props: ['msg'],
+				data: function () {
+					return {
+						message: this.msg
+					}
+				},
+				 watch: {
+				 	message: function (val) {
+				 		this.$emit('update:msg', val);
+				 	}
+				 }
+			});
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					msg: 'parent msg'
+				},
+				methods: {
+					
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="em2">
+			 @click.stop 阻止单击事件继续传播
+			 <br />
+			<a @click.stop="doThis">stop</a>
+			@submit.prevent 提交事件不再重载页面
+			<br />
+			<form @submit.prevent="onSubmit"></form>
+			@click.stop.prevent 修饰符可以串联
+			<a @click.stop.prevent="doThat"></a>
+			@submit.prevent 只有修饰符
+			<form @submit.prevent></form>
+			<br />
+			@click.capture 添加事件监听器时使用事件捕获模式
+			<br />
+			即元素自身触发的事件先在此处处理，然后才交由内部元素进行处理
+			<br />
+			<div @click.capture="doThis">...</div>
+
+
+			@click.self 只当在 event.target 是当前元素自身时触发处理函数
+			<br />
+			即事件不是从内部元素触发的 	
+			<br />
+			<div @click.self="doThat">...</div>
+			@click.once 点击事件将只会触发一次 2.1.4版本新增
+			<br />
+			<a @click.once="doThis"></a>
+			
+			@scroll.passive 滚动事件的默认行为 (即滚动行为) 将会立即触发
+			<br />
+			而不会等待 `onScroll` 完成
+			<br />
+			 这其中包含 `event.preventDefault()` 的情况
+			 <br />
+			 .passive 修饰符尤其能够提升移动端的性能。
+			 <br />
+			<div @scroll.passive="onScroll">...</div>
+		</div>
+		
+		<script>
+			/**
+			 * 事件修饰符
+			 * .stop .prevent .capture .self .once
+			 */
+			/*
+			 使用修饰符时，顺序很重要；相应的代码会以同样的顺序产生。
+			 因此，
+			 用 v-on:click.prevent.self 会阻止所有的点击，
+			 而 v-on:click.self.prevent 只会阻止对元素自身的点击。
+			 * */
+			
+			/*
+			 * 不要把 .passive 和 .prevent 一起使用，因为 .prevent 将会被忽略，同时浏览器可能会向你展示一个警告。
+			 * 请记住，.passive 会告诉浏览器你不想阻止事件的默认行为。
+			 */
+			var em2 = new Vue({
+				el: '#em2',
+				data: {
+					name: 'Vue2.js'
+				}
+			});
+			
+		</script>
+	</body>
+</html>

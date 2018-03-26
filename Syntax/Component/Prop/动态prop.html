@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<input type="text" v-model="parentMsg" />
+			<br />
+			<child message="Hello" :my-msg="parentMsg" v-bind="todo"></child>
+		</div>
+		<script>
+			Vue.component('child', {
+				// 声明 Props
+				props: ['message', 'myMsg', 'text', 'isComplete'],
+				// 就像 data 一样，prop 也可以在模板中使用
+  				// 同样也可以在 vm 实例中通过 this.message 来使用
+				template: '<span>{{ message }} {{myMsg}} {{ text }} {{ isComplete }}</span>'
+			});
+			
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					parentMsg: 'Message from parent',
+					todo: {
+						text: 'Learn Vue',
+						isComplete: false
+					}
+				}
+			})
+		</script>
+	</body>
+</html>

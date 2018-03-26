@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<my-component></my-component>
+		</div>
+		<script>
+			var Child = {
+				template: '<div>A custom component</div>'
+			};
+			
+			var vm = new Vue({
+				el: '#vm',
+				components: {
+					// <my-component> 将只在父组件模板中可用
+					'my-component': Child
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>使用自定义事件的表单输入组件</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<my-checkbox v-model='checked' value="some value"></my-checkbox>
+			<p>{{ checked }}</p>
+		</div>
+		
+		<script>
+			
+			
+			Vue.component('my-checkbox', {
+				model: {
+					prop: 'checked',
+					event: 'change'
+				},
+				props: {
+					checked: Boolean,
+					value: String
+				},
+				template: '<input type="checkbox" checked="checked" value="value" @change="changeHandler"/>',
+				methods: {
+					changeHandler: function (event) {
+						console.log(event.target.checked);
+						this.$emit('change', event.target.checked);
+					}
+				}
+				
+			});
+			
+			var vm  = new Vue({
+				el: '#vm',
+				data: {
+					checked: true
+				}
+			})
+		</script>
+	</body>
+</html>

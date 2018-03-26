@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<h3>文本:</h3>
+			<input type="text" v-model="message" placeholder="edit me" />
+			<p>Message is {{ message }}</p>
+			
+			<h3>多行文本</h3>
+			<textarea  v-model="m_msg" placeholder="add multiple lines"></textarea>
+			<p>Multiple Meaage is {{ m_msg }}</p>
+			
+			<h3>复选框</h3>
+			<input type="checkbox" id="checkbox" v-model="checked" />
+			<label for="checkbox"> {{ checked }}</label>
+			<p>多个复选框，绑定到同一个数组</p>
+			<div>
+				<input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+				<label for="jack">Jack</label>
+				<input type="checkbox" id="john" value="John" v-model="checkedNames" />
+				<label for="jack">John</label>
+				<input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+				<label for="jack">Mike</label>
+				<br />
+				<span>
+					Checked names: {{ checkedNames }}
+				</span>
+			</div>
+			
+			<h3>单选框</h3>
+				<div>
+					<input type="radio" id="one" value="One" v-model="picked" />
+					<label for="one">One</label>
+					<br />
+					<input type="radio" id="two" value="Two" v-model="picked" />
+					<label for="one">two</label>
+					<p>Picked {{ picked }}</p>
+				</div>
+				
+				<h3>选择框</h3>
+				<select v-model="selected">
+					<option value="" disabled="disabled">请选择</option>
+					<option value="a">A</option>
+					<option value="b">B</option>
+					<option value="c">C</option>
+				</select>
+				<p>Selected: {{ selected }}</p>
+				<p>多选时 (绑定到一个数组)：</p>
+				<div>
+					<select v-model="selecteds" multiple="multiple" style="width: 50px;">
+						<option value="a">A</option>
+						<option value="b">B</option>
+						<option value="c">C</option>
+					</select>
+					<p>Selecteds: {{ selecteds }}</p>
+				</div>
+				<p>用 v-for 渲染的动态选项：</p>
+				<select v-model="d_selected">
+					<option v-for="option in options" :value="option.value">
+						{{ option.text }}
+					</option>
+				</select>
+				<p>Selected: {{ d_selected }}</p>
+				
+			
+		</div>
+
+		<script>
+			var vm = new Vue({
+				el: '#vm',
+				data: {
+					message: '',
+					m_msg:'',
+					checked: true,
+					checkedNames: [],
+					picked: '',
+					selected: '',
+					selecteds: [],
+					d_selected: 'A',
+					options: [
+						{ text: 'One', value: 'A' },
+						{ text: 'Two', value: 'B' },
+						{ text: 'Three', value: 'C' },
+					]
+				}
+			})
+		</script>
+	</body>
+</html>
