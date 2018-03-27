@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="parent">
+		 	<hello-world></hello-world>
+		</div>
+		
+		<script type="text/x-template" id="hello-world-template">
+			<p>Hello World!</p>
+		</script>
+		
+		<script>
+			
+			Vue.component('hello-world', {
+				template: '#hello-world-template'
+			})
+			
+			var vm = new Vue({
+				el: '#parent'
+			});
+			
+		</script>
+	</body>
+</html>

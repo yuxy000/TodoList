@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="parent">
+		 	<terms-of-service></terms-of-service>
+		</div>
+		
+		<script>
+			/*
+			 尽管在 Vue 中渲染 HTML 很快，不过当组件中包含大量静态内容时，可以考虑使用 v-once 将渲染结果缓存起来
+			 * */
+			Vue.component('terms-of-service', {
+				template: '\
+					<div  v-once>\
+						<h1>Terms of Service</h1>\
+						...很多静态内容...\
+					</div>\
+				'
+			})
+			
+			var vm = new Vue({
+				el: '#parent'
+			});
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="parent">
+		  <user-profile ref="profile"></user-profile>
+		</div>
+		
+		<script>
+			Vue.component('user-profile', {
+				template: '<div>I am Profile</div>'
+			});
+			
+			var vm = new Vue({
+				el: '#parent'
+			});
+			
+			console.log(vm.$refs.profile);
+		</script>
+	</body>
+</html>

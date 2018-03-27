@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+	</head>
+	<body>
+		<div id="parent">
+		  <user-profile ref="profile"></user-profile>
+		</div>
+		
+		<script>
+			/*
+			 工厂函数接收一个 resolve 回调，在收到从服务器下载的组件定义时调用。
+			 也可以调用 reject(reason) 指示加载失败。
+			 这里使用 setTimeout 只是为了演示，实际上如何获取组件完全由你决定
+			 * */
+			Vue.component('user-profile', function (resolve, reject) {
+				setTimeout(function () {
+					// 将组件定义传入 resolve 回调函数
+					resolve({
+						template: '<div>I am async component</div>'
+					});
+				}, 1000);
+			});
+			
+			// 配合webpack的代码分割功能
+			Vue.component('async-webpack-example', function (resolve) {
+				// 这个特殊的 require 语法告诉 webpack
+			  	// 自动将编译后的代码分割成不同的块，
+			  	// 这些块将通过 Ajax 请求自动下载。
+			  	require(['./my-async-component'], resolve);
+			});
+			
+			// 在工厂函数中返回一个 Promise
+			Vue.component(
+				'async-webpack-example',
+				// 该 `import` 函数返回一个 `Promise` 对象。
+				() => import('./my-async-component')
+			);
+			
+			var vm = new Vue({
+				el: '#parent',
+				// 当使用局部注册时，也可以直接提供一个返回 Promise 的函数：
+				components: {
+					'my-component': () => import('./my-async-component')
+				}
+			});
+		</script>
+	</body>
+</html>
