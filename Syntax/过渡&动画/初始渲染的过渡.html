@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+		<style>
+		</style>
+	</head>
+	<body>
+		<div id="demo">
+			<button @click="show = !show">Toggle Render</button>
+			<!--
+				可以通过 appear 特性设置节点在初始渲染的过渡
+			-->
+			<transition appear>
+				<p v-if="show">Hello</p>
+			</transition>
+			
+			<!--自定义 CSS 类名-->
+			<transition
+			  appear
+			  appear-class="custom-appear-class"
+			  appear-to-class="custom-appear-to-class" (2.1.8+)
+			  appear-active-class="custom-appear-active-class"
+			>
+			  <!-- ... -->
+			</transition>
+			
+			<!--自定义 JavaScript 钩子：-->
+			<transition appear
+				@before-appear="customBeforeAppearHook"
+				@appear="customAppearHook"
+				@after-appear="customAffterAppearHook"
+				@appear-cancelled="customAppearCancelledHook">
+				
+			</transition>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el: '#demo',
+				data: {
+					show: true
+				}
+			})
+		</script>
+	</body>
+</html>
