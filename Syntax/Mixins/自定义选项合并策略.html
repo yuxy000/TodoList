@@ -26,13 +26,13 @@
 <code>
 	const merge = Vue.config.optionMergeStrategies.computed
 	Vue.config.optionMergeStrategies.vuex = function (toVal, fromVal) {
-  if (!toVal) return fromVal
-  if (!fromVal) return toVal
-  return {
-    getters: merge(toVal.getters, fromVal.getters),
-    state: merge(toVal.state, fromVal.state),
-    actions: merge(toVal.actions, fromVal.actions)
-  }
+    if (!toVal) return fromVal
+    if (!fromVal) return toVal
+    return {
+	    getters: merge(toVal.getters, fromVal.getters),
+	    state: merge(toVal.state, fromVal.state),
+	    actions: merge(toVal.actions, fromVal.actions)
+   }
 }
 </code>
 
