@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>选项合并</title>
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+	</head>
+	<body>
+		<script>
+			// 数据对象在内部会进行浅合并 (一层属性深度)，在和组件的数据发生冲突时以组件数据优先。
+			// 同名钩子函数将混合为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。
+			// 值为对象的选项，例如 methods, components 和 directives，将被混合为同一个对象。两个对象键名冲突时，取组件对象的键值对。
+			
+			// 注意：Vue.extend() 也使用同样的策略进行合并。
+			var mixin = {
+				data: function () {
+					return {
+						message: 'hello',
+						foo: 'abc'
+					}
+				},
+				created: function () {
+					console.log('混入对象的钩子被调用');
+				},
+				methods: {
+					foos: function () {
+						console.log('foos');
+					},
+					conflicting: function () {
+						console.log('from mixin!');
+					}
+				}
+			};
+			
+			var vm = new Vue({
+				mixins: [mixin],
+				data: function () {
+					return {
+						message: 'Goodbye',
+						bar: 'def'
+					}
+				},
+				created: function () {
+					console.log(this.$data.message);
+					console.log('组件的钩子函数被调用');
+				},
+				methods: {
+					bars: function () {
+						console.log('bars');
+					},
+					conflicting: function () {
+						console.log('from self');
+					}
+				}
+			});
+			vm.foos();
+			vm.bars();
+			vm.conflicting();
+		</script>
+	</body>
+</html>
