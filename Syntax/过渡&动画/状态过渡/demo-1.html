@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>状态动画与侦听器 - 1</title>
+		<script type="text/javascript" src="../../../js/vue.min.js" ></script>
+		<script type="text/javascript" src="../../../js/TweenMax.min.js" ></script>
+	</head>
+	<body>
+		<div id="animated-number-demo">
+			<input type="number" v-model.number="number" step="30" />
+			<p>{{ animatedNumber }}</p>
+		</div>
+		
+		<script>
+			var vm = new Vue({
+				el: '#animated-number-demo',
+				 data: {
+				 	number: 0,
+				 	tweenedNumber: 0
+				 },
+				 computed: {
+				 	animatedNumber: function () {
+				 		return this.tweenedNumber.toFixed(0);
+				 	}
+				 },
+				 watch: {
+				 	number: function (newValue) {
+				 		TweenLite.to(this.$data, 0.5, { tweenedNumber: newValue });
+				 	}
+				 }
+			})
+		</script>
+	</body>
+</html>
