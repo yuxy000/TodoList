@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<anchored-heading :level="level">Hello World!</anchored-heading>
+			<anchored-heading :level="2">Hello World!</anchored-heading>
+			<anchored-heading :level="3">Hello World!</anchored-heading>
+			<anchored-heading :level="4">Hello World!</anchored-heading>
+			<anchored-heading :level="5">Hello World!</anchored-heading>
+			<anchored-heading :level="6">Hello World!</anchored-heading>
+		</div>
+		
+		<script>
+			Vue.component('anchored-heading', {
+				render: function (createElement) {
+					return createElement(
+						'h' + this.level, 		// tag name
+						this.$slots.default		// 子组件中的阵列
+					)
+				},
+				props: {
+					level: {
+						type: Number,
+						required: true
+					}
+				}
+			});
+			
+			var vm = new Vue({
+				el: '#vm', 
+				data: {
+					level: 1
+				}
+			})
+		</script>
+	</body>
+</html>
