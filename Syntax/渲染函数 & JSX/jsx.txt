@@ -1,0 +1,33 @@
+如果你写了很多 render 函数，可能会觉得痛苦：
+createElement(
+  	'anchored-heading', {
+    	props: {
+      		level: 1
+    	}
+  	}, [
+    	createElement('span', 'Hello'),
+    	' world!'
+  	]
+)
+特别是模板如此简单的情况下：
+
+	<anchored-heading :level="1">
+	  <span>Hello</span> world!
+	</anchored-heading>
+	
+这就是为什么会有一个 Babel 插件，用于在 Vue 中使用 JSX 语法的原因，它可以让我们回到更接近于模板的语法上。
+
+import AnchoredHeading from './AnchoredHeading.vue'
+
+new Vue({
+  el: '#demo',
+  render: function (h) {
+    return (
+      <AnchoredHeading level={1}>
+        <span>Hello</span> world!
+      </AnchoredHeading>
+    )
+  }
+})
+将 h 作为 createElement 的别名是 Vue 生态系统中的一个通用惯例，实际上也是 JSX 所要求的，如果在作用域中 h 失去作用，在应用中会触发报错。
+更多关于 JSX 映射到 JavaScript，阅读https://github.com/vuejs/babel-plugin-transform-vue-jsx#usage

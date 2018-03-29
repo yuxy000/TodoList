@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="header-test">
+			<anchored-heading :level="level">Heading</anchored-heading>
+			<anchored-heading :level="2">Heading</anchored-heading>
+		</div>
+		<script>
+			var getChildrenTextContent = function (children) {
+				return children.map(function (node) {
+					return node.children ? getChildrenTextContent(node.children) : node.text;
+				}).join('');
+			}
+			
+			Vue.component('anchored-heading', {
+				render: function (createElement) {
+					// create kebabCase id
+					var headingId = getChildrenTextContent(this.$slots.default)
+						.toLowerCase()
+						.replace(/\W+/g, '-')
+						.replace(/(^\-|\-$)/g, '');
+						
+					return createElement(
+						'h' + this.level,
+						[
+							createElement('a', {
+								attrs: {
+									name: headingId,
+									href: '#' + headingId
+								}
+							}, this.$slots.default)
+						]
+					)
+				},
+				props: {
+					level: {
+						type: Number,
+						required: true
+					}
+				}
+			});
+			
+			var vm = new Vue({
+				el: '#header-test',
+				data: {
+					level: 1
+				}
+			});
+		</script>
+	</body>
+</html>

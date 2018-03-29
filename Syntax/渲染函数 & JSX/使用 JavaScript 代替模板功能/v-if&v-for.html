@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<list-comp :items="items"></list-comp>
+		</div>
+		<script type="text/x-template" id="list-comp">
+			<ul v-if="this.items.length">
+				<li v-for="item in items">{{ item.name }}</li>
+			</ul>			
+			<p v-else>No items found.</p>
+		</script>
+		
+		<script>
+			//在 render 函数中被 JavaScript 的 if/else 和 map 重写
+			Vue.component('list-comp', {
+				props: ['items'],
+				render: function (createElement) {
+					if (this.items.length) {
+						return createElement('ul', this.items.map(function (item) {
+							return createElement('li', item.name);
+						}));
+					} else{
+						return createElement('p', 'No items founds.');
+					}
+				}
+			});
+			
+			var vm = new Vue({
+				el: '#vm', 
+				data: {
+					items: [
+						{ name: 'Joth', id:1 },
+						{ name: 'Tim', id:2 },
+						{ name: 'Tom', id:3 },
+						{ name: 'Mary', id:4 }
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

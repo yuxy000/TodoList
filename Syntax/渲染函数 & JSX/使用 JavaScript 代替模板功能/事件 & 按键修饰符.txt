@@ -1,0 +1,23 @@
+对于 .passive、.capture 和 .once事件修饰符, Vue 提供了相应的前缀可以用于 on：
+	Modifier(s)				Prefix
+	.passive					&
+	.capture					!
+	.once						~
+	.capture.once or
+	.once.capture			~!
+例如:
+	on: {
+	  	'!click': this.doThisInCapturingMode,
+	  	'~keyup': this.doThisOnce,
+	  	'~!mouseover': this.doThisOnceInCapturingMode
+	}
+	
+对于其他的修饰符，前缀不是很重要，因为你可以在事件处理函数中使用事件方法：
+Modifier(s)							Equivalent in Handler
+.stop										event.stopPropagation()
+.prevent								event.preventDefault()
+.self										if (event.target !== event.currentTarget) return
+Keys:
+.enter, .13								if (event.keyCode !== 13) return (change 13 to another key code for other key modifiers)
+Modifiers Keys:
+.ctrl, .alt, .shift, .meta			if (!event.ctrlKey) return (change ctrlKey to altKey, shiftKey, or metaKey, respectively)

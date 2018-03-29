@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.js" ></script>
+	</head>
+	<body>
+		<div id="vm">
+			<list-comp :items="items"></list-comp>
+		</div>
+		
+		<script>
+			// 从 this.$slots 获取 VNodes 列表中的静态内容：
+			Vue.component('list-comp', {
+				render: function (createElement) {
+					// 	`<div><slot></slot></div>`
+					return createElement('div', this.$slots.default);
+				}
+			});
+			
+			// 从 this.$scopedSlots 中获得能用作函数的作用域插槽，这个函数返回 VNodes：
+			Vue.component('list-comp', {
+				props: ['message'],
+				render: function (createElement) {
+					// 	`<div><slot :text="message"></slot></div>`
+					return createElement('div', [
+						this.$scopedSlots.default({
+							text: this.message
+						})
+					]);
+				}
+			});
+			
+			// 如果要用渲染函数向子组件中传递作用域插槽，可以利用 VNode 数据中的 scopedSlots 域：
+			Vue.component('list-comp', {
+				props: ['message'],
+				render: function (createElement) {
+					return createElement('div', [
+						createElement('child', {
+							// pass `scopedSlots` in the data object
+      						// in the form of { name: props => VNode | Array<VNode> }
+      						scopedSlots: {
+      							default: function (props) {
+      								return createElement('span', props.text)
+      							}
+      						}
+						})
+					]);
+				}
+			});
+			
+			var vm = new Vue({
+				el: '#vm', 
+				data: {
+					items: [
+						{ name: 'Joth', id:1 },
+						{ name: 'Tim', id:2 },
+						{ name: 'Tom', id:3 },
+						{ name: 'Mary', id:4 }
+					]
+				}
+			})
+		</script>
+	</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script type="text/javascript" src="../../../js/vue.js" ></script>
+	</head>
+	<body>
+		<script>
+			// render 函数中没有与 v-model 相应的 api - 你必须自己来实现相应的逻辑：
+			Vue.component('custom-model', {
+				props: ['value'],
+				render: function (createElement) {
+					var self = this;
+					return createElement('input', {
+						domProps: {
+							value: self.value
+						},
+						on: {
+							input: function (input) {
+								self.$emit('input', event.target.value);
+							}
+						}
+					});
+				}
+			})
+		</script>
+	</body>
+</html>

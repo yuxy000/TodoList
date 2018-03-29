@@ -1,0 +1,18 @@
+VNodes 必须唯一
+
+组件树中的所有 VNodes 必须是唯一的。这意味着，下面的 render function 是无效的：
+render: function (createElement) {
+  	var myParagraphVNode = createElement('p', 'hi')
+  	return createElement('div', [
+    	// 错误-重复的 VNodes
+    	myParagraphVNode, myParagraphVNode
+  	])
+}
+如果你真的需要重复很多次的元素/组件，你可以使用工厂函数来实现。例如，下面这个例子 render 函数完美有效地渲染了 20 个重复的段落：
+render: function (createElement) {
+  	return createElement('div',
+    	Array.apply(null, { length: 20 }).map(function () {
+      	return createElement('p', 'hi')
+    	})
+  	)
+}
